@@ -1,0 +1,6 @@
+{
+  "name": "Al Riaz Warehousing & Storage LLC Portal",
+  "description": "Smart warehousing and fulfillment solutions corporate website for Dubai Logistics, featuring bulk storage, e-commerce fulfillment, cold storage services, a careers portal, and contact forms.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
