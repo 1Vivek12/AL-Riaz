@@ -8,154 +8,70 @@ import ServicesSection from './components/ServicesSection';
 import CareersSection from './components/CareersSection';
 import ContactSection from './components/ContactSection';
 import SubmissionTracker from './components/SubmissionTracker';
-import { QuoteRequest, JobApplication } from './types';
+import TermsSection from './components/TermsSection';
+import PrivacySection from './components/PrivacySection';
+import AdminPanel from './components/Admin/AdminPanel';
+import VerifyPortal from './components/VerifyPortal';
+import { useSubmissions } from './hooks/useSubmissions';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<string>('home');
+  const [verifyRef, setVerifyRef] = useState<string>('');
+  const {
+    quotes,
+    applications,
+    handleAddQuote,
+    handleAddApplication,
+    handleClearSubmissions
+  } = useSubmissions();
 
-  // Initialize quote submissions and job applications from localStorage
-  const [quotes, setQuotes] = useState<QuoteRequest[]>(() => {
-    try {
-      const saved = localStorage.getItem('dubai_warehouse_quotes');
-      return saved ? JSON.parse(saved) : [];
-    } catch (e) {
-      console.warn('LocalStorage not accessible:', e);
-      return [];
-    }
-  });
-
-  const [applications, setApplications] = useState<JobApplication[]>(() => {
-    try {
-      const saved = localStorage.getItem('dubai_warehouse_applications');
-      return saved ? JSON.parse(saved) : [];
-    } catch (e) {
-      console.warn('LocalStorage not accessible:', e);
-      return [];
-    }
-  });
-
-  // Synchronize quotes state with localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem('dubai_warehouse_quotes', JSON.stringify(quotes));
-    } catch (e) {
-      console.error('Failed to sync quotes:', e);
-    }
-  }, [quotes]);
-
-  // Synchronize applications state with localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem('dubai_warehouse_applications', JSON.stringify(applications));
-    } catch (e) {
-      console.error('Failed to sync applications:', e);
-    }
-  }, [applications]);
-
-  // Handle adding new quote request
-  const handleAddQuote = (newQuoteData: Omit<QuoteRequest, 'id' | 'status' | 'timestamp'>) => {
-    const newQuote: QuoteRequest = {
-      ...newQuoteData,
-      id: `quote-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-      status: 'Received',
-      timestamp: new Date().toISOString()
-    };
-    setQuotes((prev) => [newQuote, ...prev]);
+  // Unified SPA router navigation
+  const navigateTo = (page: string) => {
+    setCurrentPage(page);
+    window.history.pushState({}, '', page === 'home' ? '/' : `/${page}`);
   };
 
-  // Handle adding new job application
-  const handleAddApplication = (newAppData: Omit<JobApplication, 'id' | 'status' | 'timestamp'>) => {
-    const newApp: JobApplication = {
-      ...newAppData,
-      id: `app-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-      status: 'Submitted',
-      timestamp: new Date().toISOString()
-    };
-    setApplications((prev) => [newApp, ...prev]);
-  };
-
-  // Clear local storage for sandbox resetting
-  const handleClearSubmissions = () => {
-    if (window.confirm('Are you sure you want to clear your local submission history?')) {
-      setQuotes([]);
-      setApplications([]);
-      try {
-        localStorage.removeItem('dubai_warehouse_quotes');
-        localStorage.removeItem('dubai_warehouse_applications');
-      } catch (e) {
-        console.error(e);
+  // Sync route on popstate and initial page load
+  useEffect(() => {
+    const handleUrlChange = () => {
+      const path = window.location.pathname.substring(1) || 'home';
+      if (path.startsWith('verify')) {
+        const params = new URLSearchParams(window.location.search);
+        setVerifyRef(params.get('verify') || '');
+        setCurrentPage('verify');
+      } else if (['admin', 'home', 'about', 'services', 'careers', 'contact', 'terms', 'privacy'].includes(path)) {
+        setCurrentPage(path);
+      } else {
+        setCurrentPage('home');
       }
-    }
-  };
+    };
 
-  // Page selector helper
+    handleUrlChange();
+    window.addEventListener('popstate', handleUrlChange);
+    return () => window.removeEventListener('popstate', handleUrlChange);
+  }, []);
+
+  // Page content router mapping
   const renderPageContent = () => {
     switch (currentPage) {
       case 'home':
-        return (
-          <motion.div
-            key="home"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.22, ease: 'easeInOut' }}
-            className="flex-1 flex flex-col"
-          >
-            <HomeSection setCurrentPage={setCurrentPage} />
-          </motion.div>
-        );
+        return <HomeSection setCurrentPage={navigateTo} />;
       case 'about':
-        return (
-          <motion.div
-            key="about"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.22, ease: 'easeInOut' }}
-            className="flex-1 flex flex-col"
-          >
-            <AboutSection />
-          </motion.div>
-        );
+        return <AboutSection />;
       case 'services':
-        return (
-          <motion.div
-            key="services"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.22, ease: 'easeInOut' }}
-            className="flex-1 flex flex-col"
-          >
-            <ServicesSection />
-          </motion.div>
-        );
+        return <ServicesSection />;
       case 'careers':
-        return (
-          <motion.div
-            key="careers"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.22, ease: 'easeInOut' }}
-            className="flex-1 flex flex-col"
-          >
-            <CareersSection onAddApplication={handleAddApplication} />
-          </motion.div>
-        );
+        return <CareersSection onAddApplication={handleAddApplication} />;
       case 'contact':
-        return (
-          <motion.div
-            key="contact"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.22, ease: 'easeInOut' }}
-            className="flex-1 flex flex-col"
-          >
-            <ContactSection onAddQuote={handleAddQuote} />
-          </motion.div>
-        );
+        return <ContactSection onAddQuote={handleAddQuote} />;
+      case 'terms':
+        return <TermsSection />;
+      case 'privacy':
+        return <PrivacySection />;
+      case 'admin':
+        return <AdminPanel quotes={quotes} applications={applications} />;
+      case 'verify':
+        return <VerifyPortal initialRef={verifyRef} />;
       default:
         return (
           <div className="flex-1 flex items-center justify-center text-slate-400 py-20">
@@ -167,25 +83,30 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col font-sans selection:bg-amber-500 selection:text-slate-950" id="dubai-warehouse-app">
-      {/* Sticky Top Header */}
-      <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Header currentPage={currentPage} setCurrentPage={navigateTo} />
 
-      {/* Main Multi-Tab View Frame */}
       <main className="flex-1 flex flex-col" id="app-main-content">
         <AnimatePresence mode="wait">
-          {renderPageContent()}
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.22, ease: 'easeInOut' }}
+            className="flex-1 flex flex-col"
+          >
+            {renderPageContent()}
+          </motion.div>
         </AnimatePresence>
       </main>
 
-      {/* Submission Tracker Drawer */}
       <SubmissionTracker 
         quotes={quotes}
         applications={applications}
         onClearSubmissions={handleClearSubmissions}
       />
 
-      {/* Bottom Footer */}
-      <Footer setCurrentPage={setCurrentPage} />
+      <Footer setCurrentPage={navigateTo} />
     </div>
   );
 }

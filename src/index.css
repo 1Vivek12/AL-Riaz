@@ -34,3 +34,41 @@ html {
   scroll-behavior: smooth;
   font-family: var(--font-sans);
 }
+
+/* Print Styles for High-Quality PDF Export */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Hide everything on the webpage */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Show only the printable letter container and its children */
+  #printable-hr-letter,
+  #printable-hr-letter * {
+    visibility: visible;
+  }
+
+  /* Position the letter at the absolute top-left for perfect printing margins */
+  #printable-hr-letter {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+

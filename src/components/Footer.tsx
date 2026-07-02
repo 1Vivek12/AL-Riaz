@@ -137,9 +137,9 @@ export default function Footer({ setCurrentPage }: FooterProps) {
             &copy; {new Date().getFullYear()} Al Riaz Warehousing & Storage LLC. All Rights Reserved. Conforms to UAE Logistics standards.
           </div>
           <div className="flex gap-4">
-            <span className="hover:text-slate-300 cursor-pointer">Security Regulations</span>
+            <span onClick={() => handleNavClick('terms')} className="hover:text-slate-300 cursor-pointer">Terms & Conditions</span>
             <span>&middot;</span>
-            <span className="hover:text-slate-300 cursor-pointer">Privacy Statement</span>
+            <span onClick={() => handleNavClick('privacy')} className="hover:text-slate-300 cursor-pointer">Privacy Statement</span>
             <span>&middot;</span>
             <span className="hover:text-slate-300 cursor-pointer">UAE Compliance</span>
           </div>
