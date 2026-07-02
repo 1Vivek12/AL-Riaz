@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import { QuoteRequest, JobApplication } from '../types';
-import { FileText, ClipboardList, Clock, CheckCircle2, User, Building, Trash2, Tag, Calendar } from 'lucide-react';
+import { ClipboardList, CheckCircle2, User, Building, Tag, Calendar } from 'lucide-react';
 
 interface SubmissionTrackerProps {
   quotes: QuoteRequest[];
   applications: JobApplication[];
-  onClearSubmissions: () => void;
 }
 
-export default function SubmissionTracker({ quotes, applications, onClearSubmissions }: SubmissionTrackerProps) {
+export default function SubmissionTracker({ quotes, applications }: SubmissionTrackerProps) {
   const [activeTab, setActiveTab] = useState<'quotes' | 'apps'>('quotes');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,17 +44,9 @@ export default function SubmissionTracker({ quotes, applications, onClearSubmiss
                 Active Submission Tracker
               </h4>
               <p className="text-[10px] text-slate-300 uppercase font-bold tracking-tight">
-                Phase 1 Client-Side Sandbox Storage
+                Secure Supabase Database Storage
               </p>
             </div>
-            <button
-              onClick={onClearSubmissions}
-              title="Clear Local Sandbox Data"
-              className="p-1.5 rounded-sm hover:bg-brand-dark text-slate-300 hover:text-rose-400 transition-colors"
-              id="clear-submissions-btn"
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
           </div>
 
           {/* Tab selectors */}
@@ -153,7 +144,7 @@ export default function SubmissionTracker({ quotes, applications, onClearSubmiss
                         <span>Role: <b className="text-slate-700">{app.position}</b></span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <FileText className="w-3.5 h-3.5 text-brand-gold shrink-0" />
+                        <ClipboardList className="w-3.5 h-3.5 text-brand-gold shrink-0" />
                         <span className="truncate">CV File: <b className="text-slate-700">{app.cvName}</b> ({app.cvSize})</span>
                       </div>
                       <div className="flex items-center gap-1.5">
@@ -169,7 +160,7 @@ export default function SubmissionTracker({ quotes, applications, onClearSubmiss
 
           {/* Footer explanation */}
           <div className="p-3 bg-slate-100 border-t border-slate-200 text-[10px] text-slate-500 text-center font-bold uppercase tracking-tight">
-            State saved in standard browser localStorage.
+            State saved in secure database registry.
           </div>
         </div>
       )}

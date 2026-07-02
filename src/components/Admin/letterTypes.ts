@@ -85,32 +85,8 @@ export const DEFAULT_LETTER_PARAMS: Omit<LetterParams, 'template' | 'refNumber' 
   signatoryTitle: 'HR Manager'
 };
 
-/** Save generated letter parameters to system database registry */
-export function saveLetterToRegistry(params: LetterParams) {
-  try {
-    const saved = localStorage.getItem('al_riaz_verified_letters');
-    const letters: LetterParams[] = saved ? JSON.parse(saved) : [];
-    
-    // Check if letter with this reference number already exists to avoid duplicates
-    if (!letters.some(l => l.refNumber === params.refNumber)) {
-      letters.push(params);
-      localStorage.setItem('al_riaz_verified_letters', JSON.stringify(letters));
-    }
-  } catch (e) {
-    console.error('Failed to save to letter registry:', e);
-  }
-}
-
-/** Retrieve letter parameters from system database registry by reference number */
-export function getLetterFromRegistry(refNumber: string): LetterParams | null {
-  try {
-    const saved = localStorage.getItem('al_riaz_verified_letters');
-    if (!saved) return null;
-    const letters: LetterParams[] = JSON.parse(saved);
-    return letters.find(l => l.refNumber.toUpperCase().trim() === refNumber.toUpperCase().trim()) || null;
-  } catch (e) {
-    console.error('Failed to read from letter registry:', e);
-    return null;
-  }
-}
+/**
+ * Letter CRUD operations are now handled by Supabase.
+ * See: src/lib/letterService.ts for saveLetter, getLetterByRef, getAllLetters, etc.
+ */
 

@@ -7,19 +7,20 @@ import { FileText, FileCheck } from 'lucide-react';
 interface DocumentGeneratorProps {
   initialName?: string;
   initialPosition?: string;
+  editParams?: LetterParams | null;
   onGenerate: (params: LetterParams) => void;
 }
 
-export default function DocumentGenerator({ initialName = '', initialPosition = '', onGenerate }: DocumentGeneratorProps) {
+export default function DocumentGenerator({ initialName = '', initialPosition = '', editParams = null, onGenerate }: DocumentGeneratorProps) {
   const d = DEFAULT_LETTER_PARAMS;
   const [template, setTemplate] = useState<'offer' | 'appointment'>('offer');
 
   // Personal & Position
-  const [fullName, setFullName] = useState(initialName || d.fullName);
+  const [fullName, setFullName] = useState(d.fullName);
   const [nationality, setNationality] = useState(d.nationality);
   const [passportNumber, setPassportNumber] = useState(d.passportNumber);
   const [address, setAddress] = useState(d.address);
-  const [position, setPosition] = useState(initialPosition || d.position);
+  const [position, setPosition] = useState(d.position);
   const [department, setDepartment] = useState(d.department);
   const [reportingTo, setReportingTo] = useState(d.reportingTo);
   const [workLocation, setWorkLocation] = useState(d.workLocation);
@@ -52,10 +53,70 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
   const [signatoryName, setSignatoryName] = useState(d.signatoryName);
   const [signatoryTitle, setSignatoryTitle] = useState(d.signatoryTitle);
 
+  // Load initial params or edit params
   useEffect(() => {
-    if (initialName) setFullName(initialName);
-    if (initialPosition) setPosition(initialPosition);
-  }, [initialName, initialPosition]);
+    if (editParams) {
+      setTemplate(editParams.template);
+      setFullName(editParams.fullName);
+      setNationality(editParams.nationality);
+      setPassportNumber(editParams.passportNumber);
+      setAddress(editParams.address);
+      setPosition(editParams.position);
+      setDepartment(editParams.department);
+      setReportingTo(editParams.reportingTo);
+      setWorkLocation(editParams.workLocation);
+      setContractType(editParams.contractType);
+      setStartDate(editParams.startDate);
+      setProbationMonths(editParams.probationMonths);
+      setWorkingHours(editParams.workingHours);
+      setWeeklyOff(editParams.weeklyOff);
+      setBasicSalary(editParams.basicSalary);
+      setHousingAllowance(editParams.housingAllowance);
+      setTransportAllowance(editParams.transportAllowance);
+      setOtherAllowance(editParams.otherAllowance);
+      setTotalSalary(editParams.totalSalary);
+      setAnnualLeaveDays(editParams.annualLeaveDays);
+      setSickLeaveDays(editParams.sickLeaveDays);
+      setFlightAllowance(editParams.flightAllowance);
+      setMedicalInsurance(editParams.medicalInsurance);
+      setAdditionalBenefits(editParams.additionalBenefits);
+      setNoticePeriod(editParams.noticePeriod);
+      setGratuityNote(editParams.gratuityNote);
+      setConfidentialityClause(editParams.confidentialityClause);
+      setSignatoryName(editParams.signatoryName);
+      setSignatoryTitle(editParams.signatoryTitle);
+    } else {
+      setFullName(initialName || d.fullName);
+      setPosition(initialPosition || d.position);
+      // Reset other fields to default
+      setNationality(d.nationality);
+      setPassportNumber(d.passportNumber);
+      setAddress(d.address);
+      setDepartment(d.department);
+      setReportingTo(d.reportingTo);
+      setWorkLocation(d.workLocation);
+      setContractType(d.contractType);
+      setStartDate(d.startDate);
+      setProbationMonths(d.probationMonths);
+      setWorkingHours(d.workingHours);
+      setWeeklyOff(d.weeklyOff);
+      setBasicSalary(d.basicSalary);
+      setHousingAllowance(d.housingAllowance);
+      setTransportAllowance(d.transportAllowance);
+      setOtherAllowance(d.otherAllowance);
+      setTotalSalary(d.totalSalary);
+      setAnnualLeaveDays(d.annualLeaveDays);
+      setSickLeaveDays(d.sickLeaveDays);
+      setFlightAllowance(d.flightAllowance);
+      setMedicalInsurance(d.medicalInsurance);
+      setAdditionalBenefits(d.additionalBenefits);
+      setNoticePeriod(d.noticePeriod);
+      setGratuityNote(d.gratuityNote);
+      setConfidentialityClause(d.confidentialityClause);
+      setSignatoryName(d.signatoryName);
+      setSignatoryTitle(d.signatoryTitle);
+    }
+  }, [initialName, initialPosition, editParams]);
 
   const generateRef = () => `AR-HR-${new Date().getFullYear()}-${Math.floor(100 + Math.random() * 900)}`;
   const todayStr = () => new Date().toLocaleDateString('en-AE', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -64,7 +125,9 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
     e.preventDefault();
     if (!fullName || !position) { alert('Name and Position are required.'); return; }
     onGenerate({
-      template, refNumber: generateRef(), date: todayStr(),
+      template, 
+      refNumber: editParams ? editParams.refNumber : generateRef(), 
+      date: editParams ? editParams.date : todayStr(),
       fullName, nationality, passportNumber, address,
       position, department, reportingTo, workLocation,
       contractType, startDate: startDate || todayStr(), probationMonths, workingHours, weeklyOff,
@@ -79,7 +142,9 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
       {/* Header + Template Switcher */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-100 pb-4 gap-4">
         <div>
-          <h2 className="text-xl font-extrabold text-brand-navy uppercase tracking-tight">HR Letter Generator</h2>
+          <h2 className="text-xl font-extrabold text-brand-navy uppercase tracking-tight">
+            {editParams ? `Edit Letter (${editParams.refNumber})` : 'HR Letter Generator'}
+          </h2>
           <p className="text-xs text-slate-500">Every field is fully editable — customize before generating</p>
         </div>
         <div className="flex bg-slate-100 p-1 rounded border border-slate-200 shrink-0">
@@ -120,7 +185,7 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
       {/* Submit */}
       <div className="pt-4 border-t border-slate-100 flex justify-end">
         <button type="submit" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-navy hover:bg-brand-dark text-white font-extrabold text-xs shadow-md transition-all duration-200 hover:translate-y-[-1px] active:translate-y-0 cursor-pointer uppercase tracking-widest">
-          <FileCheck className="w-4 h-4 text-brand-gold" /> Generate Preview
+          <FileCheck className="w-4 h-4 text-brand-gold" /> {editParams ? 'Save & Preview' : 'Generate Preview'}
         </button>
       </div>
     </form>

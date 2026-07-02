@@ -6,7 +6,8 @@ import DocumentPreview from './DocumentPreview';
 import AdminLogin from './AdminLogin';
 import AdminSettings from './AdminSettings';
 import { LetterParams } from './letterTypes';
-import { Briefcase, FileSignature, Shield, History, Eye, Trash2, Settings, LogOut } from 'lucide-react';
+import { getAllLetters, deleteLetter } from '../../lib/letterService';
+import { Briefcase, FileSignature, Shield, History, Eye, Edit, Trash2, Settings, LogOut, Loader2 } from 'lucide-react';
 
 interface AdminPanelProps {
   quotes: QuoteRequest[];
@@ -26,14 +27,19 @@ export default function AdminPanel({ quotes, applications }: AdminPanelProps) {
   const [candidateName, setCandidateName] = useState('');
   const [candidatePosition, setCandidatePosition] = useState('');
   const [previewParams, setPreviewParams] = useState<LetterParams | null>(null);
+  const [editParams, setEditParams] = useState<LetterParams | null>(null);
   const [historyLetters, setHistoryLetters] = useState<LetterParams[]>([]);
+  const [loadingHistory, setLoadingHistory] = useState(false);
 
-  const loadHistory = () => {
+  const loadHistory = async () => {
+    setLoadingHistory(true);
     try {
-      const saved = localStorage.getItem('al_riaz_verified_letters');
-      setHistoryLetters(saved ? JSON.parse(saved) : []);
+      const saved = await getAllLetters();
+      setHistoryLetters(saved);
     } catch (e) {
       console.error('Failed to load letter history:', e);
+    } finally {
+      setLoadingHistory(false);
     }
   };
 
@@ -67,6 +73,7 @@ export default function AdminPanel({ quotes, applications }: AdminPanelProps) {
   const handleSelectCandidate = (name: string, position: string) => {
     setCandidateName(name);
     setCandidatePosition(position);
+    setEditParams(null); // Not editing
     setActiveTab('generator');
   };
 
@@ -80,21 +87,22 @@ export default function AdminPanel({ quotes, applications }: AdminPanelProps) {
     setActiveTab('preview');
   };
 
-  const handleDeleteLetter = (ref: string) => {
+  const handleEditLetter = (params: LetterParams) => {
+    setEditParams(params);
+    setActiveTab('generator');
+  };
+
+  const handleDeleteLetter = async (ref: string) => {
     if (window.confirm(`Are you sure you want to revoke/delete registered letter ${ref}?`)) {
-      try {
-        const saved = localStorage.getItem('al_riaz_verified_letters');
-        const list: LetterParams[] = saved ? JSON.parse(saved) : [];
-        const updated = list.filter(l => l.refNumber !== ref);
-        localStorage.setItem('al_riaz_verified_letters', JSON.stringify(updated));
-        setHistoryLetters(updated);
-      } catch (e) {
-        console.error(e);
+      const success = await deleteLetter(ref);
+      if (success) {
+        setHistoryLetters((prev) => prev.filter(l => l.refNumber !== ref));
+      } else {
+        alert('Failed to delete letter from database.');
       }
     }
   };
 
-  // If not authenticated, render the secure Login gate
   if (!isAuthenticated) {
     return <AdminLogin onLoginSuccess={handleLoginSuccess} />;
   }
@@ -122,7 +130,12 @@ export default function AdminPanel({ quotes, applications }: AdminPanelProps) {
                   <Briefcase className="w-3.5 h-3.5" /> Submissions
                 </button>
                 <button
-                  onClick={() => setActiveTab('generator')}
+                  onClick={() => {
+                    setEditParams(null);
+                    setCandidateName('');
+                    setCandidatePosition('');
+                    setActiveTab('generator');
+                  }}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${activeTab === 'generator' ? 'bg-brand-navy text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
                 >
                   <FileSignature className="w-3.5 h-3.5" /> Generator
@@ -159,12 +172,17 @@ export default function AdminPanel({ quotes, applications }: AdminPanelProps) {
           
           {activeTab === 'generator' && (
             <div className="max-w-4xl mx-auto">
-              <DocumentGenerator initialName={candidateName} initialPosition={candidatePosition} onGenerate={handleGenerate} />
+              <DocumentGenerator 
+                initialName={candidateName} 
+                initialPosition={candidatePosition} 
+                editParams={editParams}
+                onGenerate={handleGenerate} 
+              />
             </div>
           )}
 
           {activeTab === 'preview' && previewParams && (
-            <DocumentPreview params={previewParams} onBack={() => setActiveTab('generator')} />
+            <DocumentPreview params={previewParams} onBack={() => setActiveTab('history')} />
           )}
 
           {activeTab === 'settings' && (
@@ -176,7 +194,11 @@ export default function AdminPanel({ quotes, applications }: AdminPanelProps) {
               <h2 className="text-xl font-extrabold text-brand-navy uppercase tracking-tight border-b-2 border-brand-gold pb-2 flex items-center gap-2">
                 <History className="w-5 h-5 text-brand-gold" /> Issued Letters History ({historyLetters.length})
               </h2>
-              {historyLetters.length === 0 ? (
+              {loadingHistory ? (
+                <div className="flex justify-center py-12">
+                  <Loader2 className="w-8 h-8 animate-spin text-brand-navy" />
+                </div>
+              ) : historyLetters.length === 0 ? (
                 <div className="bg-white border border-slate-200 rounded-sm p-8 text-center text-slate-500 text-sm shadow-sm">
                   No letters issued/registered yet. Go to the Letter Generator tab to create one.
                 </div>
@@ -197,6 +219,9 @@ export default function AdminPanel({ quotes, applications }: AdminPanelProps) {
                       <div className="flex gap-2">
                         <button onClick={() => handleViewHistorical(letter)} className="px-3 py-1.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold inline-flex items-center gap-1 cursor-pointer">
                           <Eye className="w-3.5 h-3.5" /> View
+                        </button>
+                        <button onClick={() => handleEditLetter(letter)} className="px-3 py-1.5 rounded bg-amber-50 hover:bg-amber-100 text-brand-gold text-xs font-bold inline-flex items-center gap-1 cursor-pointer">
+                          <Edit className="w-3.5 h-3.5" /> Edit
                         </button>
                         <button onClick={() => handleDeleteLetter(letter.refNumber)} className="px-3 py-1.5 rounded bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold inline-flex items-center gap-1 cursor-pointer">
                           <Trash2 className="w-3.5 h-3.5" /> Delete

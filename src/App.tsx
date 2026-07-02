@@ -22,7 +22,7 @@ export default function App() {
     applications,
     handleAddQuote,
     handleAddApplication,
-    handleClearSubmissions
+    refreshData
   } = useSubmissions();
 
   // Unified SPA router navigation
@@ -103,7 +103,6 @@ export default function App() {
       <SubmissionTracker 
         quotes={quotes}
         applications={applications}
-        onClearSubmissions={handleClearSubmissions}
       />
 
       <Footer setCurrentPage={navigateTo} />

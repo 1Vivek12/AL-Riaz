@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { getLetterFromRegistry } from './Admin/letterTypes';
+import { getLetterByRef } from '../lib/letterService';
 import { LetterParams } from './Admin/letterTypes';
-import { Search, ShieldCheck, ShieldAlert, Calendar, User, Briefcase, DollarSign, ArrowRight } from 'lucide-react';
+import { Search, ShieldCheck, ShieldAlert, Loader2 } from 'lucide-react';
 
 interface VerifyPortalProps {
   initialRef?: string;
 }
 
 export default function VerifyPortal({ initialRef = '' }: VerifyPortalProps) {
-  const [refInput, setRefInput] = useState(initialRef);
+  const [refInput, setRefInput] = useState(initialRef || 'AR-HR-2026-');
   const [searchResult, setSearchResult] = useState<LetterParams | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (initialRef) {
@@ -19,13 +20,16 @@ export default function VerifyPortal({ initialRef = '' }: VerifyPortalProps) {
         searchRef = `AR-HR-2026-${searchRef}`;
       }
       setRefInput(initialRef);
-      const matched = getLetterFromRegistry(searchRef);
-      setSearchResult(matched);
-      setHasSearched(true);
+      setLoading(true);
+      getLetterByRef(searchRef).then((matched) => {
+        setSearchResult(matched);
+        setHasSearched(true);
+        setLoading(false);
+      });
     }
   }, [initialRef]);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!refInput.trim()) return;
     
@@ -34,9 +38,11 @@ export default function VerifyPortal({ initialRef = '' }: VerifyPortalProps) {
       searchRef = `AR-HR-2026-${searchRef}`;
     }
 
-    const matched = getLetterFromRegistry(searchRef);
+    setLoading(true);
+    const matched = await getLetterByRef(searchRef);
     setSearchResult(matched);
     setHasSearched(true);
+    setLoading(false);
   };
 
   return (
@@ -76,16 +82,23 @@ export default function VerifyPortal({ initialRef = '' }: VerifyPortalProps) {
               </div>
               <button 
                 type="submit"
-                className="px-6 py-3 rounded bg-brand-navy hover:bg-brand-dark text-white font-bold text-xs uppercase tracking-widest transition-all cursor-pointer shrink-0"
+                disabled={loading}
+                className="px-6 py-3 rounded bg-brand-navy hover:bg-brand-dark text-white font-bold text-xs uppercase tracking-widest transition-all cursor-pointer shrink-0 flex items-center justify-center min-w-[120px]"
               >
-                Verify Status
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Verify Status'}
               </button>
             </div>
           </form>
         </div>
 
         {/* Results Screen */}
-        {hasSearched && (
+        {loading && (
+          <div className="flex justify-center py-8">
+            <Loader2 className="w-8 h-8 animate-spin text-brand-navy" />
+          </div>
+        )}
+
+        {!loading && hasSearched && (
           <div className="animate-in fade-in duration-200">
             {searchResult ? (
               /* Verified Success Layout */
