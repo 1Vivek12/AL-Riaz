@@ -81,8 +81,8 @@ export const DEFAULT_LETTER_PARAMS: Omit<LetterParams, 'template' | 'refNumber' 
   gratuityNote: 'End-of-service gratuity as per UAE Federal Decree-Law No. 33 of 2021 (Article 51)',
   confidentialityClause: 'Employee shall not disclose any proprietary warehousing data, client cargo manifests, inventory systems, pricing structures, or operational trade secrets during and after the term of employment.',
 
-  signatoryName: 'Riaz Al-Mansoor',
-  signatoryTitle: 'Managing Director'
+  signatoryName: 'Abdul Kareem',
+  signatoryTitle: 'HR Manager'
 };
 
 /** Save generated letter parameters to system database registry */

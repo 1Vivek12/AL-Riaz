@@ -49,7 +49,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
             </span>
             <span className="hidden sm:inline text-slate-700">|</span>
             <span className="flex items-center gap-1">
-              <Mail className="w-3 h-3 text-[#C5A85C] shrink-0" /> info@dubaiwarehouse.com
+              <Mail className="w-3 h-3 text-[#C5A85C] shrink-0" /> info@alriazlogistics.com
             </span>
             <span className="hidden sm:inline text-slate-700">|</span>
             <span className="flex items-center gap-1 font-bold text-[#C5A85C]">

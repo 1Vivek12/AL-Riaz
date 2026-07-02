@@ -122,7 +122,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-brand-gold shrink-0" />
-                <span className="text-slate-400">info@dubaiwarehouse.com</span>
+                <span className="text-slate-400">info@alriazlogistics.com</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-brand-gold shrink-0" />
