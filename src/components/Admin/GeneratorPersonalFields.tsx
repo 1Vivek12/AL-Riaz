@@ -31,22 +31,18 @@ export default function GeneratorPersonalFields(props: PersonalFieldsProps) {
           <input type="text" value={props.fullName} onChange={e => props.setFullName(e.target.value)} placeholder="e.g. Mohammad Tariq Khan" required className={inputCls} />
         </div>
         
-        {isAppt && (
-          <>
-            <div>
-              <label className={labelCls}>Nationality</label>
-              <input type="text" value={props.nationality} onChange={e => props.setNationality(e.target.value)} placeholder="e.g. Pakistani" className={inputCls} />
-            </div>
-            <div>
-              <label className={labelCls}>Passport Number</label>
-              <input type="text" value={props.passportNumber} onChange={e => props.setPassportNumber(e.target.value)} placeholder="e.g. AB1234567" className={inputCls} />
-            </div>
-            <div className="md:col-span-2">
-              <label className={labelCls}>Residential Address</label>
-              <input type="text" value={props.address} onChange={e => props.setAddress(e.target.value)} className={inputCls} />
-            </div>
-          </>
-        )}
+        <div>
+          <label className={labelCls}>Nationality</label>
+          <input type="text" value={props.nationality} onChange={e => props.setNationality(e.target.value)} placeholder="e.g. Pakistani" className={inputCls} />
+        </div>
+        <div>
+          <label className={labelCls}>Passport Number</label>
+          <input type="text" value={props.passportNumber} onChange={e => props.setPassportNumber(e.target.value)} placeholder="e.g. AB1234567" className={inputCls} />
+        </div>
+        <div className="md:col-span-2">
+          <label className={labelCls}>Residential Address</label>
+          <input type="text" value={props.address} onChange={e => props.setAddress(e.target.value)} className={inputCls} />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
