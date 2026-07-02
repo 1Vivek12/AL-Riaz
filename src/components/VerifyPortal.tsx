@@ -14,8 +14,12 @@ export default function VerifyPortal({ initialRef = '' }: VerifyPortalProps) {
 
   useEffect(() => {
     if (initialRef) {
+      let searchRef = initialRef.trim();
+      if (/^\d+$/.test(searchRef)) {
+        searchRef = `AR-HR-2026-${searchRef}`;
+      }
       setRefInput(initialRef);
-      const matched = getLetterFromRegistry(initialRef);
+      const matched = getLetterFromRegistry(searchRef);
       setSearchResult(matched);
       setHasSearched(true);
     }
@@ -24,7 +28,13 @@ export default function VerifyPortal({ initialRef = '' }: VerifyPortalProps) {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!refInput.trim()) return;
-    const matched = getLetterFromRegistry(refInput);
+    
+    let searchRef = refInput.trim();
+    if (/^\d+$/.test(searchRef)) {
+      searchRef = `AR-HR-2026-${searchRef}`;
+    }
+
+    const matched = getLetterFromRegistry(searchRef);
     setSearchResult(matched);
     setHasSearched(true);
   };
@@ -50,7 +60,7 @@ export default function VerifyPortal({ initialRef = '' }: VerifyPortalProps) {
         <div className="bg-white border border-slate-200 rounded-sm p-6 shadow-sm">
           <form onSubmit={handleSearch} className="space-y-4">
             <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
-              Enter Document Reference Number (e.g. AR-HR-2026-452)
+              Enter Document Reference Number (e.g. 130 or AR-HR-2026-130)
             </label>
             <div className="flex gap-2">
               <div className="relative flex-1">
@@ -58,7 +68,7 @@ export default function VerifyPortal({ initialRef = '' }: VerifyPortalProps) {
                   type="text" 
                   value={refInput}
                   onChange={(e) => setRefInput(e.target.value)}
-                  placeholder="AR-HR-2026-XXX"
+                  placeholder="e.g. 130"
                   required
                   className="w-full pl-10 pr-3 py-3 border border-slate-200 rounded focus:border-brand-gold focus:outline-none text-sm font-mono uppercase tracking-wider"
                 />
