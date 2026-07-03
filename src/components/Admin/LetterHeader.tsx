@@ -1,4 +1,4 @@
-import { Printer, ArrowLeft, ShieldCheck } from 'lucide-react';
+import { Printer, ArrowLeft } from 'lucide-react';
 import QRCode from 'react-qr-code';
 import Logo from '../Logo';
 import { LetterParams } from './letterTypes';
@@ -43,18 +43,9 @@ export function LetterheadTop({ params }: LetterHeaderProps) {
           <p className="text-slate-600">{params.address}</p>
         </div>
 
-        {/* Verification Badge & QR Code */}
-        <div className="text-right flex items-center gap-2 border border-slate-200 bg-slate-50 p-1.5 rounded-sm shadow-xs select-none max-w-[230px] shrink-0 font-sans">
-          <div className="space-y-0.5 text-[7.5px] text-slate-500 text-left leading-tight">
-            <p className="font-bold text-brand-navy text-[8.5px] flex items-center gap-0.5 uppercase tracking-wide">
-              <ShieldCheck className="w-3 h-3 text-brand-gold shrink-0" /> Verified Legal
-            </p>
-            <p>Scan to verify status or visit:</p>
-            <p className="font-bold text-brand-navy text-[8px]">alriazlogistics.com/verify</p>
-            <p className="text-slate-400">Ref: <span className="font-mono text-slate-700 font-semibold">{params.refNumber}</span></p>
-          </div>
-          
-          <div className="w-11 h-11 bg-white p-0.5 border border-slate-200 rounded-sm shrink-0 flex items-center justify-center">
+        {/* QR Code */}
+        <div className="border border-slate-200 bg-slate-50 p-1.5 rounded-sm shadow-xs select-none shrink-0">
+          <div className="w-11 h-11 bg-white p-0.5 border border-slate-200 rounded-sm flex items-center justify-center">
             <QRCode 
               value={`https://alriazlogistics.com/verify?ref=${params.refNumber}`} 
               size={40}
