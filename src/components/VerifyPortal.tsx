@@ -149,7 +149,7 @@ export default function VerifyPortal({ initialRef = '' }: VerifyPortalProps) {
                         <td className="px-4 py-2.5 font-bold text-slate-500 uppercase">Registry Status</td>
                         <td className="px-4 py-2.5 text-emerald-600 font-bold flex items-center gap-1.5">
                           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                          ACTIVE & MOHRE LICENSED
+                          ACTIVE
                         </td>
                       </tr>
                     </tbody>

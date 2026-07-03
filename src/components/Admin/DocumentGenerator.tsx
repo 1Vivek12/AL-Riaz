@@ -13,6 +13,8 @@ interface DocumentGeneratorProps {
 
 export default function DocumentGenerator({ initialName = '', initialPosition = '', editParams = null, onGenerate }: DocumentGeneratorProps) {
   const d = DEFAULT_LETTER_PARAMS;
+  const todayStr = () => new Date().toLocaleDateString('en-CA');
+  const [date, setDate] = useState(todayStr());
   const [template, setTemplate] = useState<'offer' | 'appointment'>('offer');
 
   // Personal & Position
@@ -58,6 +60,7 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
     if (editParams) {
       setTemplate(editParams.template);
       setFullName(editParams.fullName);
+      setDate(editParams.date);
       setNationality(editParams.nationality);
       setPassportNumber(editParams.passportNumber);
       setAddress(editParams.address);
@@ -88,6 +91,7 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
     } else {
       setFullName(initialName || d.fullName);
       setPosition(initialPosition || d.position);
+      setDate(todayStr());
       // Reset other fields to default
       setNationality(d.nationality);
       setPassportNumber(d.passportNumber);
@@ -119,7 +123,10 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
   }, [initialName, initialPosition, editParams]);
 
   const generateRef = () => `AR-HR-${new Date().getFullYear()}-${Math.floor(100 + Math.random() * 900)}`;
-  const todayStr = () => new Date().toLocaleDateString('en-AE', { year: 'numeric', month: 'long', day: 'numeric' });
+  const formatDate = (iso: string) => {
+    const d2 = new Date(iso + 'T00:00:00');
+    return d2.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,10 +134,10 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
     onGenerate({
       template, 
       refNumber: editParams ? editParams.refNumber : generateRef(), 
-      date: editParams ? editParams.date : todayStr(),
+      date: formatDate(date),
       fullName, nationality, passportNumber, address,
       position, department, reportingTo, workLocation,
-      contractType, startDate: startDate || todayStr(), probationMonths, workingHours, weeklyOff,
+      contractType, startDate: startDate || formatDate(todayStr()), probationMonths, workingHours, weeklyOff,
       basicSalary, housingAllowance, transportAllowance, otherAllowance, totalSalary,
       annualLeaveDays, sickLeaveDays, flightAllowance, medicalInsurance, additionalBenefits,
       noticePeriod, gratuityNote, confidentialityClause, signatoryName, signatoryTitle
@@ -147,13 +154,19 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
           </h2>
           <p className="text-xs text-slate-500">Every field is fully editable — customize before generating</p>
         </div>
-        <div className="flex bg-slate-100 p-1 rounded border border-slate-200 shrink-0">
-          <button type="button" onClick={() => setTemplate('offer')} className={`flex items-center gap-1 px-3 py-1.5 rounded text-xs font-bold transition-all cursor-pointer ${template === 'offer' ? 'bg-white text-brand-navy shadow-sm' : 'text-slate-500'}`}>
-            <FileText className="w-3.5 h-3.5" /> Offer & Agreement
-          </button>
-          <button type="button" onClick={() => setTemplate('appointment')} className={`flex items-center gap-1 px-3 py-1.5 rounded text-xs font-bold transition-all cursor-pointer ${template === 'appointment' ? 'bg-white text-brand-navy shadow-sm' : 'text-slate-500'}`}>
-            <FileCheck className="w-3.5 h-3.5" /> Appointment Letter
-          </button>
+        <div className="flex flex-col gap-4">
+          <div className="flex bg-slate-100 p-1 rounded border border-slate-200 shrink-0">
+            <button type="button" onClick={() => setTemplate('offer')} className={`flex items-center gap-1 px-3 py-1.5 rounded text-xs font-bold transition-all cursor-pointer ${template === 'offer' ? 'bg-white text-brand-navy shadow-sm' : 'text-slate-500'}`}>
+              <FileText className="w-3.5 h-3.5" /> Offer & Agreement
+            </button>
+            <button type="button" onClick={() => setTemplate('appointment')} className={`flex items-center gap-1 px-3 py-1.5 rounded text-xs font-bold transition-all cursor-pointer ${template === 'appointment' ? 'bg-white text-brand-navy shadow-sm' : 'text-slate-500'}`}>
+              <FileCheck className="w-3.5 h-3.5" /> Appointment Letter
+            </button>
+          </div>
+          <div className="flex flex-col">
+            <label className="text-[10px] font-bold text-slate-600 uppercase block mb-1">Date</label>
+            <input type="date" value={date} onChange={e => setDate(e.target.value)} className="w-full px-3 py-1.5 border border-slate-200 rounded focus:border-brand-gold focus:outline-none text-xs bg-white" />
+          </div>
         </div>
       </div>
 
