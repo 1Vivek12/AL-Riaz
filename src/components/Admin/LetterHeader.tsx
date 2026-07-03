@@ -23,7 +23,7 @@ export function LetterheadTop({ params }: LetterHeaderProps) {
           <p>Logistics District, Dubai South</p>
           <p>P.O. Box 282228, Dubai, United Arab Emirates (Adjacent to Al Maktoum International Airport)</p>
           <p>Tel: +971 4 800 WAREHOUSE | hr@alriazlogistics.com</p>
-          <p className="font-bold text-slate-600">Trade License No: 7549895 | MOHRE Reg: #889240/2026</p>
+          <p className="font-bold text-slate-600">Trade License No: 7549895</p>
         </div>
       </div>
 
