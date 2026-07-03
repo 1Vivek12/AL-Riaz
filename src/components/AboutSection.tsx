@@ -44,7 +44,7 @@ export default function AboutSection() {
               We look beyond basic cargo placement. Our mission is to integrate regional e-commerce marketplaces and industrial distribution channels under a single secure, high-capacity warehousing standard. 
             </p>
             <p className="text-sm text-slate-600 leading-relaxed">
-              From our flagship facility strategically placed near the Al Maktoum International Airport and Jebel Ali Port, we support rapid transshipments, immediate customs processing, and optimal storage density. By empowering local merchants and global brands, we actively contribute to Dubai’s prestigious status as the premier global supply-chain gateway.
+              From our flagship facility strategically placed in Dubai South Free Zone, adjacent to Al Maktoum International Airport, we support rapid transshipments, immediate customs processing, and optimal storage density. By empowering local merchants and global brands, we actively contribute to Dubai’s prestigious status as the premier global supply-chain gateway.
             </p>
 
             {/* Quick credentials bulletpoints */}
@@ -75,7 +75,7 @@ export default function AboutSection() {
               </p>
               <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
                 <div>
-                  <span className="block text-2xl font-black text-brand-gold">JAFZA Hub</span>
+                  <span className="block text-2xl font-black text-brand-gold">Dubai South Hub</span>
                   <span className="text-xs text-slate-400">Strategic Proximity</span>
                 </div>
                 <div className="w-12 h-12 rounded-full bg-brand-dark flex items-center justify-center text-brand-gold border border-slate-800">

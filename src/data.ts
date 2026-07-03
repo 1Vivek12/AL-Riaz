@@ -8,7 +8,7 @@ export const SERVICES: ServiceItem[] = [
     id: 'b2b-storage',
     title: 'B2B Bulk Storage',
     shortDescription: 'Heavy-duty racking and industrial storage tailored for large volume, bulk inventories with 24/7 access.',
-    fullDescription: 'Our industrial bulk storage units are designed to accommodate high-volume enterprise cargo. We offer custom heavy-duty racking, specialized pallet positioning, and high-clearance bays matching international Jebel Ali logistics standards. With deep aisle layouts and state-of-the-art inventory systems, your bulk inventory is handled with maximum space efficiency and safety.',
+    fullDescription: 'Our industrial bulk storage units are designed to accommodate high-volume enterprise cargo. We offer custom heavy-duty racking, specialized pallet positioning, and high-clearance bays matching international Dubai South logistics standards. With deep aisle layouts and state-of-the-art inventory systems, your bulk inventory is handled with maximum space efficiency and safety.',
     image: b2bStorageImg,
     features: [
       'High-capacity pallet racking',
@@ -106,7 +106,7 @@ export const JOB_OPENINGS: Job[] = [
       'Expertise in Warehouse Management Systems (WMS) and e-commerce integrations',
       'Proven team leadership, scheduling, and labor optimization skills',
       'Fluency in English (Arabic or Hindi/Urdu is a strong advantage)',
-      'Familiarity with JAFZA / Dubai South regulatory and customs clearance'
+      'Familiarity with Dubai South regulatory and customs clearance'
     ],
     benefits: [
       'Comprehensive family medical insurance coverage',
@@ -119,7 +119,7 @@ export const JOB_OPENINGS: Job[] = [
     id: 'job-2',
     title: 'Heavy Forklift Operator',
     department: 'Logistics',
-    location: 'Jebel Ali Free Zone (JAFZA)',
+    location: 'Dubai South Free Zone',
     type: 'Full-time',
     salary: 'AED 4,500 - 5,500 / month',
     description: 'We are looking for a certified Heavy Forklift Operator to manage loading, unloading, and racking positioning in our high-bay industrial storage zone. Absolute focus on warehouse safety and physical precision is required.',

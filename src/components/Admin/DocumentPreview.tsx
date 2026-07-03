@@ -72,7 +72,7 @@ export default function DocumentPreview({ params, onBack }: DocumentPreviewProps
         {/* Footer Legal Line */}
         <div className="mt-8 pt-3 border-t border-slate-200 text-center text-[8px] text-slate-400 font-sans">
           This document is the confidential property of Al Riaz Warehousing & Storage LLC. Unauthorized reproduction or distribution is strictly prohibited.
-          <br />Trade License: CN-4028167 | JAFZA Registered | Dubai, UAE
+          <br />Trade License No: 7549895 | Registered in Dubai South Free Zone | Dubai, UAE
         </div>
       </div>
     </div>

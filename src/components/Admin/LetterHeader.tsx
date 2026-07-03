@@ -20,10 +20,10 @@ export function LetterheadTop({ params }: LetterHeaderProps) {
         <Logo className="w-14 h-14" showText={true} variant="dark" />
         <div className="text-right text-[9px] text-slate-500 font-sans leading-normal space-y-0.5">
           <h4 className="font-extrabold text-brand-navy text-[10px] uppercase">Al Riaz Warehousing & Storage LLC</h4>
-          <p>Plot 1404, Logistics District, Dubai South</p>
-          <p>P.O. Box 234120, Dubai, United Arab Emirates</p>
+          <p>Logistics District, Dubai South</p>
+          <p>P.O. Box 282228, Dubai, United Arab Emirates (Adjacent to Al Maktoum International Airport)</p>
           <p>Tel: +971 4 800 WAREHOUSE | hr@alriazlogistics.com</p>
-          <p className="font-bold text-slate-600">Trade License: CN-4028167 | MOHRE Reg: #889240/2026</p>
+          <p className="font-bold text-slate-600">Trade License No: 7549895 | MOHRE Reg: #889240/2026</p>
         </div>
       </div>
 

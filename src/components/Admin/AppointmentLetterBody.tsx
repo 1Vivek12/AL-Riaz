@@ -9,7 +9,7 @@ export default function AppointmentLetterBody({ params }: AppointmentLetterBodyP
   return (
     <div className="space-y-3 text-justify leading-relaxed text-[11px] font-sans text-slate-800">
       <p>
-        With reference to your application and subsequent interview, we are pleased to confirm your appointment at <strong>Al Riaz Warehousing & Storage LLC</strong> (hereinafter referred to as "the Company"), a registered establishment under Jebel Ali Free Zone Authority (JAFZA) and Dubai South Logistics District, United Arab Emirates. This appointment is governed by <strong>UAE Federal Decree-Law No. 33 of 2021</strong> and the applicable JAFZA Employment Regulations.
+        With reference to your application and subsequent interview, we are pleased to confirm your appointment at <strong>Al Riaz Warehousing & Storage LLC</strong> (hereinafter referred to as "the Company"), a registered establishment in Dubai South Free Zone (Logistics District), United Arab Emirates. This appointment is governed by <strong>UAE Federal Decree-Law No. 33 of 2021</strong> and the applicable Dubai South Employment Regulations.
       </p>
 
       {/* 1. Appointment Details */}
@@ -94,7 +94,7 @@ export default function AppointmentLetterBody({ params }: AppointmentLetterBodyP
       {/* 11. Governing Law */}
       <h3 className="font-black text-brand-navy text-[11px] uppercase pt-1">11. Governing Law</h3>
       <p>
-        This appointment is governed by UAE Federal Decree-Law No. 33 of 2021 and JAFZA Employment Regulations. Disputes shall be resolved through MOHRE/JAFZA labour authorities and the courts of Dubai.
+        This appointment is governed by UAE Federal Decree-Law No. 33 of 2021 and Dubai South Employment Regulations. Disputes shall be resolved through Dubai South Authority labour authorities and the courts of Dubai.
       </p>
 
       {/* Acceptance */}

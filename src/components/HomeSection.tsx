@@ -157,7 +157,7 @@ export default function HomeSection({ setCurrentPage }: HomeSectionProps) {
                 Require Custom Temperature Control or Bonded Area?
               </h3>
               <p className="text-sm text-slate-300 max-w-xl">
-                We design personalized logistical layouts tailored for unique manufacturing, customs, and fulfillment volumes inside Jebel Ali Free Zone (JAFZA).
+                We design personalized logistical layouts tailored for unique manufacturing, customs, and fulfillment volumes inside Dubai South Free Zone.
               </p>
             </div>
             <button

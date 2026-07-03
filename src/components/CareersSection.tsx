@@ -136,7 +136,7 @@ export default function CareersSection({ onAddApplication }: CareersSectionProps
             Build Your Logistics Career
           </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            We value safety, reliability, and precision. Join a premier logistics team operating in Dubai South and Jebel Ali Free Zone. Check our current vacancies and apply today.
+            We value safety, reliability, and precision. Join a premier logistics team operating in Dubai South Free Zone. Check our current vacancies and apply today.
           </p>
         </div>
 

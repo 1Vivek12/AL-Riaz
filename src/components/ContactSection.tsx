@@ -100,7 +100,7 @@ export default function ContactSection({ onAddQuote }: ContactSectionProps) {
                     HQ Location
                   </span>
                   <p className="text-sm text-brand-navy font-bold leading-relaxed uppercase">
-                    Plot 1404, Logistics District, Dubai South (Near DWC Airport), Dubai, UAE
+                    Logistics District, Dubai South, P.O. Box 282228, Dubai, United Arab Emirates (Adjacent to Al Maktoum International Airport)
                   </p>
                 </div>
               </div>
@@ -331,7 +331,7 @@ export default function ContactSection({ onAddQuote }: ContactSectionProps) {
                 Dubai South Logistics Hub Location Map
               </h3>
               <p className="text-xs text-slate-500 font-bold uppercase">
-                Lat: 24.8962° N, Lon: 55.1611° E | Prime access to Jebel Ali seaport (JAFZA) & Al Maktoum Airport (DWC)
+                Lat: 24.8962° N, Lon: 55.1611° E | Prime access to Al Maktoum International Airport (DWC) & Major Freight Corridors
               </p>
             </div>
             <a 
@@ -381,7 +381,7 @@ export default function ContactSection({ onAddQuote }: ContactSectionProps) {
               </div>
               <div className="bg-brand-navy/95 backdrop-blur-md px-3.5 py-2 rounded-sm border border-slate-700 shadow-xl max-w-xs mx-auto text-white">
                 <span className="block text-xs font-black uppercase tracking-wider">AL RIAZ WAREHOUSING HQ</span>
-                <span className="block text-[10px] text-slate-300 font-bold uppercase">Logistics District Plot 1404</span>
+                <span className="block text-[10px] text-slate-300 font-bold uppercase">Logistics District, Dubai South</span>
                 <span className="block text-[9px] text-brand-gold font-bold uppercase mt-0.5">2 Mins from Airport Cargo Gate</span>
               </div>
             </div>

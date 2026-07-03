@@ -27,7 +27,7 @@ export default function TermsSection() {
             </h2>
           </div>
           <p className="text-sm text-slate-600 leading-relaxed">
-            These Terms & Conditions govern all warehousing, logistics, and storage services provided by <strong>Al Riaz Warehousing & Storage LLC</strong> at our designated facilities in Dubai South, Jebel Ali Free Zone (JAFZA), and other UAE locations. By submitting cargo or using our storage portals, depositors agree to comply with these terms.
+            These Terms & Conditions govern all warehousing, logistics, and storage services provided by <strong>Al Riaz Warehousing & Storage LLC</strong> at our designated facilities in Dubai South Free Zone, and other UAE locations. By submitting cargo or using our storage portals, depositors agree to comply with these terms.
           </p>
         </div>
 

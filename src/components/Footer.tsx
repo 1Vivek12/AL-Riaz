@@ -113,7 +113,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
                 <span className="text-slate-400">
-                  Plot 1404, Logistics District, Dubai South (Near Al Maktoum Airport), Dubai, United Arab Emirates
+                  Logistics District, Dubai South, P.O. Box 282228, Dubai, United Arab Emirates (Adjacent to Al Maktoum International Airport)
                 </span>
               </li>
               <li className="flex items-center gap-2.5">
@@ -134,7 +134,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
 
         <div className="border-t border-brand-dark mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            &copy; {new Date().getFullYear()} Al Riaz Warehousing & Storage LLC. All Rights Reserved. Conforms to UAE Logistics standards.
+            &copy; {new Date().getFullYear()} Al Riaz Warehousing & Storage LLC. All Rights Reserved. Trade License No: 7549895 | Dubai South Free Zone.
           </div>
           <div className="flex gap-4">
             <span onClick={() => handleNavClick('terms')} className="hover:text-slate-300 cursor-pointer">Terms & Conditions</span>

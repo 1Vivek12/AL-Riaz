@@ -57,7 +57,7 @@ export const DEFAULT_LETTER_PARAMS: Omit<LetterParams, 'template' | 'refNumber' 
   position: '',
   department: 'Logistics & Operations',
   reportingTo: 'Operations Manager',
-  workLocation: 'Plot 1404, Logistics District, Dubai South, UAE',
+  workLocation: 'Logistics District, Dubai South, UAE (Adjacent to Al Maktoum International Airport)',
 
   contractType: 'Unlimited (Full-time)',
   startDate: '',

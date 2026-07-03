@@ -60,7 +60,7 @@ export default function PrivacySection() {
               We process data solely to:
               <span className="block mt-2">• Respond to inquiries and formulate personalized warehousing rate quotations.</span>
               <span className="block mt-1">• Evaluate employment applications and coordinate recruitment schedules.</span>
-              <span className="block mt-1">• Maintain internal operational safety logs in compliance with Dubai South and JAFZA customs criteria.</span>
+              <span className="block mt-1">• Maintain internal operational safety logs in compliance with Dubai South customs criteria.</span>
             </p>
           </div>
 

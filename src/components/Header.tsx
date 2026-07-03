@@ -38,7 +38,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
               Al Riaz Warehousing & Storage LLC
             </span>
             <span className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] bg-slate-800 text-slate-200 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
-              <ShieldCheck className="w-3 h-3 text-[#C5A85C] shrink-0" /> JAFZA Certified
+              <ShieldCheck className="w-3 h-3 text-[#C5A85C] shrink-0" /> Dubai South Registered
             </span>
           </div>
 

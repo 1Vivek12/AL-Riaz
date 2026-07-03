@@ -9,7 +9,7 @@ export default function OfferLetterBody({ params }: OfferLetterBodyProps) {
   return (
     <div className="space-y-3 text-justify leading-relaxed text-[11px] font-sans text-slate-800">
       <p>
-        We are pleased to extend this formal offer of employment to you at <strong>Al Riaz Warehousing & Storage LLC</strong> (hereinafter referred to as "the Company"), a registered establishment under the Jebel Ali Free Zone Authority (JAFZA) and Dubai South Logistics District, United Arab Emirates. This offer is subject to the terms and conditions outlined below and the applicable provisions of <strong>UAE Federal Decree-Law No. 33 of 2021</strong> concerning the Regulation of Labour Relations and its Executive Regulations.
+        We are pleased to extend this formal offer of employment to you at <strong>Al Riaz Warehousing & Storage LLC</strong> (hereinafter referred to as "the Company"), a registered establishment in Dubai South Free Zone (Logistics District), United Arab Emirates. This offer is subject to the terms and conditions outlined below and the applicable provisions of <strong>UAE Federal Decree-Law No. 33 of 2021</strong> concerning the Regulation of Labour Relations and its Executive Regulations.
       </p>
 
       {/* 1. Position */}
@@ -21,7 +21,7 @@ export default function OfferLetterBody({ params }: OfferLetterBodyProps) {
       {/* 2. Contract Type */}
       <h3 className="font-black text-brand-navy text-[11px] uppercase pt-1">2. Contract Type & Commencement</h3>
       <p>
-        This is a <strong>{params.contractType}</strong> employment contract. Your employment shall commence on <strong>{params.startDate}</strong>, subject to the successful completion of medical fitness tests, security clearance, and submission of all required original documents for MOHRE/JAFZA visa processing.
+        This is a <strong>{params.contractType}</strong> employment contract. Your employment shall commence on <strong>{params.startDate}</strong>, subject to the successful completion of medical fitness tests, security clearance, and submission of all required original documents for Dubai South visa processing.
       </p>
 
       {/* 3. Probation */}
@@ -84,7 +84,7 @@ export default function OfferLetterBody({ params }: OfferLetterBodyProps) {
       {/* 11. Governing Law */}
       <h3 className="font-black text-brand-navy text-[11px] uppercase pt-1">11. Governing Law & Jurisdiction</h3>
       <p>
-        This agreement shall be governed by and construed in accordance with the laws of the United Arab Emirates, including UAE Federal Decree-Law No. 33 of 2021 and JAFZA Employment Regulations. Any disputes shall be referred to the competent MOHRE/JAFZA labour authorities and subsequently to the courts of Dubai.
+        This agreement shall be governed by and construed in accordance with the laws of the United Arab Emirates, including UAE Federal Decree-Law No. 33 of 2021 and Dubai South Employment Regulations. Any disputes shall be referred to the competent Dubai South Authority labour authorities and subsequently to the courts of Dubai.
       </p>
 
       {/* Acceptance */}
