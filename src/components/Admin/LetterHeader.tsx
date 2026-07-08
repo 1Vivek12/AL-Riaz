@@ -22,7 +22,7 @@ export function LetterheadTop({ params }: LetterHeaderProps) {
           <h4 className="font-extrabold text-brand-navy text-[10px] uppercase">Al Riaz Warehousing & Storage LLC</h4>
           <p>Logistics District, Dubai South</p>
           <p>P.O. Box 282228, Dubai, United Arab Emirates (Adjacent to Al Maktoum International Airport)</p>
-          <p>Tel: +971 4 800 WAREHOUSE | hr@alriazlogistics.com</p>
+          <p>Tel: +971 567573018 | hr@alriazlogistics.com</p>
           <p className="font-bold text-slate-600">Trade License No: 7549895</p>
         </div>
       </div>

@@ -132,9 +132,7 @@ export default function ContactSection({ onAddQuote }: ContactSectionProps) {
                   <span className="block text-xs font-bold text-brand-gold uppercase tracking-widest">
                     Digital Inbox
                   </span>
-                  <p className="text-sm text-brand-navy font-black uppercase">
-                    info@alriazlogistics.com
-                  </p>
+                  <p className="text-sm text-brand-navy font-black uppercase">+971 567573018 info@alriazlogistics.com</p>
                   <p className="text-[11px] text-slate-500 font-medium">
                     Enterprise RFPs: leasing@dubaiwarehouse.com
                   </p>
