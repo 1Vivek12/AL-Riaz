@@ -53,7 +53,7 @@ export default function Header({ currentPage, setCurrentPage }: HeaderProps) {
             </span>
             <span className="hidden sm:inline text-slate-700">|</span>
             <span className="flex items-center gap-1 font-bold text-[#C5A85C]">
-              <Phone className="w-3 h-3 shrink-0" /> 800-WAREHOUSE
+              <Phone className="w-3 h-3 shrink-0" /> +971 567573018
             </span>
           </div>
         </div>
