@@ -29,9 +29,7 @@ export function LetterheadTop({ params }: LetterHeaderProps) {
 
       {/* Reference & Date Line */}
       <div className="flex justify-between items-center text-[10px] font-sans text-slate-600 mb-5">
-  {params.template !== 'offer' && params.refNumber && (
-    <span>Ref: <strong className="text-slate-800">{params.refNumber}</strong></span>
-  )}
+  {params.refNumber && (<span>Ref: <strong className="text-slate-800">{params.refNumber}</strong></span>)}
   <span>Date: <strong className="text-slate-800">{params.date}</strong></span>
 </div>
 
