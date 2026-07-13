@@ -164,7 +164,8 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
       signatoryTitle,
     };
     if (template === 'offer') {
-      onGenerate(commonParams);
+      const refNum = editParams ? editParams.refNumber : generateRef();
+      onGenerate({ ...commonParams, refNumber: refNum });
     } else {
       onGenerate({
         ...commonParams,
