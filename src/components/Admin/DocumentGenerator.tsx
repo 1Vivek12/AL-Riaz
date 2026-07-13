@@ -131,17 +131,46 @@ export default function DocumentGenerator({ initialName = '', initialPosition = 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !position) { alert('Name and Position are required.'); return; }
-    onGenerate({
-      template, 
-      refNumber: editParams ? editParams.refNumber : generateRef(), 
+    const commonParams = {
+      template,
       date: formatDate(date),
-      fullName, nationality, passportNumber, address,
-      position, department, reportingTo, workLocation,
-      contractType, startDate: startDate || formatDate(todayStr()), probationMonths, workingHours, weeklyOff,
-      basicSalary, housingAllowance, transportAllowance, otherAllowance, totalSalary,
-      annualLeaveDays, sickLeaveDays, flightAllowance, medicalInsurance, additionalBenefits,
-      noticePeriod, gratuityNote, confidentialityClause, signatoryName, signatoryTitle
-    });
+      fullName,
+      nationality,
+      passportNumber,
+      address,
+      position,
+      department,
+      reportingTo,
+      workLocation,
+      contractType,
+      startDate: startDate || formatDate(todayStr()),
+      probationMonths,
+      workingHours,
+      weeklyOff,
+      basicSalary,
+      housingAllowance,
+      transportAllowance,
+      otherAllowance,
+      totalSalary,
+      annualLeaveDays,
+      sickLeaveDays,
+      flightAllowance,
+      medicalInsurance,
+      additionalBenefits,
+      noticePeriod,
+      gratuityNote,
+      confidentialityClause,
+      signatoryName,
+      signatoryTitle,
+    };
+    if (template === 'offer') {
+      onGenerate(commonParams);
+    } else {
+      onGenerate({
+        ...commonParams,
+        refNumber: editParams ? editParams.refNumber : generateRef(),
+      });
+    }
   };
 
   return (

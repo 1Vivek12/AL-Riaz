@@ -1,7 +1,7 @@
 /** Shared type definition for HR letter parameters — every field is fully editable */
 export interface LetterParams {
   template: 'offer' | 'appointment';
-  refNumber: string;
+  refNumber?: string;
   date: string;
 
   // Employee Details
